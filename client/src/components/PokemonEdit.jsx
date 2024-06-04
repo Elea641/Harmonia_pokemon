@@ -6,6 +6,7 @@ function PokemonEdit() {
   return (
     <>
       <Form method="PUT">
+        <h1>EDIT POKEMON</h1>
         <label htmlFor="name">Nom</label>{" "}
         <input
           type="text"
@@ -13,6 +14,7 @@ function PokemonEdit() {
           name="name"
           defaultValue={loaderData.name}
         />
+        <label htmlFor="name">Url</label>{" "}
         <input
           type="text"
           id="imageUrl"
