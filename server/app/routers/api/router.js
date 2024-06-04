@@ -7,8 +7,10 @@ const router = express.Router();
 /* ************************************************************************* */
 
 const itemsRouter = require("./items/router");
+const pokemonsRouter = require("./pokemons/router");
 
 router.use("/items", itemsRouter);
+router.use("/pokemons", pokemonsRouter);
 
 /* ************************************************************************* */
 

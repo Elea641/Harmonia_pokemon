@@ -1,0 +1,26 @@
+export async function fetchApi(url) {
+  try {
+    const response = await fetch(url);
+    const jsonData = await response.json();
+    return jsonData;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des données :", error);
+    return null;
+  }
+}
+
+export async function sendPokemon(url, pokemon, http) {
+  try {
+    const response = await fetch(url, {
+      method: http,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(pokemon),
+    });
+    return response;
+  } catch (error) {
+    console.error("Erreur lors de l'envoi des données :", error);
+    return null;
+  }
+}

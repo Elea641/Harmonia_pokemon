@@ -4,9 +4,8 @@ create table user (
   password varchar(255) not null
 );
 
-create table item (
+create table pokemon (
   id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
-  user_id int unsigned not null,
-  foreign key(user_id) references user(id)
+  name varchar(255) not null,
+  image_url varchar(255) not null
 );
