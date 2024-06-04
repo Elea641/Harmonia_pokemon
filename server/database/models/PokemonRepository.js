@@ -25,7 +25,26 @@ class PokemonRepository extends AbstractRepository {
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
-      `select * from ${this.table} where id = ?`,
+      `SELECT 
+      p.id, 
+      p.name, 
+      p.image_url, 
+      p.numero_pokedex, 
+      GROUP_CONCAT(t.name SEPARATOR ', ') AS types
+  FROM 
+      ${this.table} p
+  JOIN 
+      pokemon_type pt ON p.id = pt.pokemon_id
+  JOIN 
+      type t ON t.id = pt.type_id
+  WHERE 
+      p.id = ?
+  GROUP BY 
+      p.id, 
+      p.name, 
+      p.image_url, 
+      p.numero_pokedex;
+  `,
       [id]
     );
 
@@ -34,10 +53,31 @@ class PokemonRepository extends AbstractRepository {
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all items from the "item" table
-    const [rows] = await this.database.query(`select * from ${this.table}`);
+    // Execute the SQL SELECT query to retrieve all Pokémon with their associated types
+    const query = `
+          SELECT 
+              p.id, 
+              p.name, 
+              p.image_url, 
+              p.numero_pokedex, 
+              GROUP_CONCAT(t.name SEPARATOR ', ') AS types
+          FROM 
+              pokemon p
+          JOIN 
+              pokemon_type pt ON p.id = pt.pokemon_id
+          JOIN 
+              type t ON t.id = pt.type_id
+          GROUP BY 
+              p.id, 
+              p.name, 
+              p.image_url, 
+              p.numero_pokedex;
+      `;
 
-    // Return the array of items
+    // Execute the query
+    const [rows] = await this.database.query(query);
+
+    // Return the array of Pokémon with their types
     return rows;
   }
 
