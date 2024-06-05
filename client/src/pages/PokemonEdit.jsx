@@ -29,11 +29,16 @@ function PokemonEdit() {
         />
         <label htmlFor="type">Type</label>
         <select id="type" name="type">
-          {loaderData.pokemon.types.map((type) => (
-            <option key={type.id} value={type.name}>
-              {type.name}
-            </option>
-          ))}
+          {loaderData.pokemon.types[0] &&
+            loaderData.types.map((type) => (
+              <option
+                key={type.id}
+                value={type.id}
+                selected={type.id === loaderData.pokemon.types[0].id}
+              >
+                {type.name}
+              </option>
+            ))}
         </select>
         <button type="submit">Modifier</button>
       </Form>

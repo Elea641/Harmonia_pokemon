@@ -35,17 +35,18 @@ const read = async (req, res, next) => {
 
 // The E of BREAD - Edit (Update) operation
 // This operation is not yet implemented
+
 const edit = async (req, res, next) => {
-  // Extract the item data from the request body
   const pokemon = req.body;
   try {
-    // Insert the item into the database
-    const insertId = await tables.pokemon.update(pokemon, req.params.id);
+    await tables.pokemon.update(pokemon, req.params.id);
 
-    // Respond with HTTP 201 (Created) and the ID of the newly inserted item
-    res.status(201).json({ insertId });
+    await tables.pokemonType.delete(req.params.id);
+
+    await tables.pokemonType.create(req.params.id, parseInt(pokemon.type, 10));
+
+    res.status(200).end();
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
@@ -58,9 +59,7 @@ const add = async (req, res, next) => {
     // Insert the item into the database
     const pokemonId = await tables.pokemon.create(pokemon);
 
-    const typeId = await tables.type.typeByName(pokemon.type);
-
-    await tables.pokemonType.create(pokemonId, typeId);
+    await tables.pokemonType.create(pokemonId, parseInt(pokemon.type, 10));
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted item
     res.status(201).json({ pokemonId });

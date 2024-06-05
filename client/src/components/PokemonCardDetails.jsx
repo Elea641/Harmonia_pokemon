@@ -6,9 +6,8 @@ function PokemonCardDetails({ pokemon }) {
       <h2>{pokemon.name}</h2>
       <img src={pokemon.image_url} alt={pokemon.name} />
       <ul>
-        {pokemon.types.map((type) => (
-          <li key={type.id}>{type.name}</li>
-        ))}
+        {pokemon.types &&
+          pokemon.types.map((type) => <li key={type.id}>{type.name}</li>)}
       </ul>
     </section>
   );

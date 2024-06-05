@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
-import PokemonCardList from "./PokemonCardList";
+import PokemonCardList from "../components/PokemonCardList";
 
 function PokemonList() {
   const pokemons = useLoaderData();
@@ -9,7 +9,7 @@ function PokemonList() {
   return (
     <ul>
       {pokemons.map((pokemon) => (
-        <li key={pokemon.numero_pokedex}>
+        <li key={pokemon.id}>
           <Link to={`/${pokemon.id}`}>
             <PokemonCardList pokemon={pokemon} />
           </Link>

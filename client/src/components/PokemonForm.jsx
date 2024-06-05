@@ -13,11 +13,12 @@ function PokemonForm({ types }) {
       <input type="text" id="numberPokedex" name="numberPokedex" />
       <label htmlFor="type">Type</label>
       <select id="type" name="type">
-        {types.map((type) => (
-          <option key={type.id} value={type.name}>
-            {type.name}
-          </option>
-        ))}
+        {types &&
+          types.map((type) => (
+            <option key={type.id} value={type.id}>
+              {type.name}
+            </option>
+          ))}
       </select>
       <button type="submit">Ajouter</button>
     </Form>

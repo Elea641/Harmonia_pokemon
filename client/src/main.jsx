@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import App from "./App";
-import PokemonList from "./components/PokemonList";
+import PokemonList from "./pages/PokemonList";
 import PokemonDetails from "./pages/PokemonDetails";
 import PokemonAdd from "./pages/PokemonAdd";
 import PokemonEdit from "./pages/PokemonEdit";
