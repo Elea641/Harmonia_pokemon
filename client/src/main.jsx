@@ -12,6 +12,8 @@ import PokemonList from "./components/PokemonList";
 import PokemonDetails from "./components/PokemonDetails";
 import { fetchApi, sendPokemon } from "./services/api.service";
 
+const basePokemonUrl = "/api/pokemons";
+
 const router = createBrowserRouter([
   {
     element: <App />,
@@ -19,15 +21,16 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <PokemonList />,
-        loader: () => fetchApi(`${import.meta.env.VITE_API_URL}/api/pokemons`),
+        loader: () => fetchApi(basePokemonUrl),
         action: async ({ request }) => {
           const formData = await request.formData();
 
           const name = formData.get("name");
+          // const name = parseInt(formData.get("name"));
           const imageUrl = formData.get("imageUrl");
 
           await sendPokemon(
-            `${import.meta.env.VITE_API_URL}/api/pokemons`,
+            basePokemonUrl,
             {
               name,
               imageUrl,
@@ -41,8 +44,7 @@ const router = createBrowserRouter([
       {
         path: "/:id",
         element: <PokemonDetails />,
-        loader: ({ params }) =>
-          fetchApi(`${import.meta.env.VITE_API_URL}/api/pokemons/${params.id}`),
+        loader: ({ params }) => fetchApi(`${basePokemonUrl}/${params.id}`),
 
         action: async ({ request, params }) => {
           const formData = await request.formData();
@@ -53,7 +55,7 @@ const router = createBrowserRouter([
           switch (request.method.toUpperCase()) {
             case "PUT": {
               await sendPokemon(
-                `${import.meta.env.VITE_API_URL}/api/pokemons/${params.id}`,
+                `${basePokemonUrl}/${params.id}`,
                 {
                   name,
                   imageUrl,
@@ -66,7 +68,7 @@ const router = createBrowserRouter([
 
             case "DELETE": {
               await sendPokemon(
-                `${import.meta.env.VITE_API_URL}/api/pokemons/${params.id}`,
+                `${basePokemonUrl}/${params.id}`,
                 {
                   name,
                   imageUrl,

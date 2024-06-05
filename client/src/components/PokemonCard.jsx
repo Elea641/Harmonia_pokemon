@@ -8,7 +8,7 @@ function PokemonCard({ pokemon }) {
         src={pokemon.image_url}
         alt="affiche d'un pokémon"
       />
-      <h1>{pokemon.name}</h1>
+      <h2>{pokemon.name}</h2>
     </article>
   );
 }

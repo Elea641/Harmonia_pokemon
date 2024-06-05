@@ -1,6 +1,6 @@
 export async function fetchApi(url) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(import.meta.env.VITE_API_URL + url);
     const jsonData = await response.json();
     return jsonData;
   } catch (error) {
@@ -11,7 +11,7 @@ export async function fetchApi(url) {
 
 export async function sendPokemon(url, pokemon, http) {
   try {
-    const response = await fetch(url, {
+    const response = await fetch(import.meta.env.VITE_API_URL + url, {
       method: http,
       headers: {
         "Content-Type": "application/json",
