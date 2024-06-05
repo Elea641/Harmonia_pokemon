@@ -1,0 +1,17 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  width: 100vw;
+  background-color: #292929;
+  height: 3.5rem;
+}
+
+a > h1 {
+  color: #ebebeb;
+}
+
+nav > a {
+  color: #ebebeb;
+}

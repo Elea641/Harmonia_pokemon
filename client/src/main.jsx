@@ -9,7 +9,8 @@ import {
 
 import App from "./App";
 import PokemonList from "./components/PokemonList";
-import PokemonDetails from "./components/PokemonDetails";
+import PokemonDetails from "./pages/PokemonDetails";
+import PokemonAdd from "./pages/PokemonAdd";
 import { fetchApi, sendPokemon } from "./services/api.service";
 
 const router = createBrowserRouter([
@@ -40,6 +41,33 @@ const router = createBrowserRouter([
       },
       {
         path: "/:id",
+        element: <PokemonDetails />,
+        loader: ({ params }) =>
+          fetchApi(`${import.meta.env.VITE_API_URL}/api/pokemons/${params.id}`),
+      },
+      {
+        path: "/pokemon",
+        element: <PokemonAdd />,
+        action: async ({ request }) => {
+          const formData = await request.formData();
+
+          const name = formData.get("name");
+          const imageUrl = formData.get("imageUrl");
+
+          await sendPokemon(
+            `${import.meta.env.VITE_API_URL}/api/pokemons`,
+            {
+              name,
+              imageUrl,
+            },
+            request.method.toUpperCase()
+          );
+
+          return redirect(`/`);
+        },
+      },
+      {
+        path: "/pokemon/edition/:id",
         element: <PokemonDetails />,
         loader: ({ params }) =>
           fetchApi(`${import.meta.env.VITE_API_URL}/api/pokemons/${params.id}`),

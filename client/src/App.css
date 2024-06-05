@@ -1,6 +1,8 @@
 @import "../src/assets/styles/PokemonCard.css";
-@import "../src/assets/styles/PokemonList.css";
+@import "../src/assets/styles/PokemonDetails.css";
 @import "../src/assets/styles/PokemonForm.css";
+@import "../src/assets/styles/Navbar.css";
+
 * {
   padding: 0;
   margin: 0;
@@ -10,5 +12,5 @@
 
 a {
   text-decoration: none;
-  color: black;
+  color: #292929;
 }

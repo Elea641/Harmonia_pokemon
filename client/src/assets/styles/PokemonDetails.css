@@ -2,6 +2,6 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5rem;
+  padding: 3rm 5rem;
   flex-wrap: wrap;
 }
