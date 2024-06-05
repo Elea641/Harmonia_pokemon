@@ -3,6 +3,8 @@ const Joi = require("joi");
 const pokemonSchema = Joi.object({
   name: Joi.string().max(255).required(),
   imageUrl: Joi.string().max(255).required(),
+  numberPokedex: Joi.string().max(255).required(),
+  type: Joi.string().max(255).required(),
 });
 
 const validatePokemon = (req, res, next) => {

@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import {
   createBrowserRouter,
   redirect,
@@ -11,7 +10,10 @@ import App from "./App";
 import PokemonList from "./components/PokemonList";
 import PokemonDetails from "./pages/PokemonDetails";
 import PokemonAdd from "./pages/PokemonAdd";
+import PokemonEdit from "./pages/PokemonEdit";
 import { fetchApi, sendPokemon } from "./services/api.service";
+
+const basePokemonUrl = "/api/pokemons";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <PokemonList />,
-        loader: () => fetchApi(`${import.meta.env.VITE_API_URL}/api/pokemons`),
+        loader: () => fetchApi(basePokemonUrl),
         action: async ({ request }) => {
           const formData = await request.formData();
 
@@ -28,7 +30,7 @@ const router = createBrowserRouter([
           const imageUrl = formData.get("imageUrl");
 
           await sendPokemon(
-            `${import.meta.env.VITE_API_URL}/api/pokemons`,
+            basePokemonUrl,
             {
               name,
               imageUrl,
@@ -42,23 +44,27 @@ const router = createBrowserRouter([
       {
         path: "/:id",
         element: <PokemonDetails />,
-        loader: ({ params }) =>
-          fetchApi(`${import.meta.env.VITE_API_URL}/api/pokemons/${params.id}`),
+        loader: ({ params }) => fetchApi(`${basePokemonUrl}/${params.id}`),
       },
       {
         path: "/pokemon",
         element: <PokemonAdd />,
+        loader: () => fetchApi("/api/types"),
         action: async ({ request }) => {
           const formData = await request.formData();
 
           const name = formData.get("name");
           const imageUrl = formData.get("imageUrl");
+          const numberPokedex = formData.get("numberPokedex");
+          const type = formData.get("type");
 
           await sendPokemon(
-            `${import.meta.env.VITE_API_URL}/api/pokemons`,
+            basePokemonUrl,
             {
               name,
               imageUrl,
+              numberPokedex,
+              type,
             },
             request.method.toUpperCase()
           );
@@ -68,23 +74,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/pokemon/edition/:id",
-        element: <PokemonDetails />,
-        loader: ({ params }) =>
-          fetchApi(`${import.meta.env.VITE_API_URL}/api/pokemons/${params.id}`),
+        element: <PokemonEdit />,
+        loader: async ({ params }) => {
+          const pokemonPromise = fetchApi(`${basePokemonUrl}/${params.id}`);
+          const typesPromise = fetchApi("/api/types");
 
+          const [pokemon, types] = await Promise.all([
+            pokemonPromise,
+            typesPromise,
+          ]);
+
+          return { pokemon, types };
+        },
         action: async ({ request, params }) => {
           const formData = await request.formData();
 
           const name = formData.get("name");
           const imageUrl = formData.get("imageUrl");
+          const numberPokedex = formData.get("numberPokedex");
+          const type = formData.get("type");
 
           switch (request.method.toUpperCase()) {
             case "PUT": {
               await sendPokemon(
-                `${import.meta.env.VITE_API_URL}/api/pokemons/${params.id}`,
+                `${basePokemonUrl}/${params.id}`,
                 {
                   name,
                   imageUrl,
+                  numberPokedex,
+                  type,
                 },
                 request.method.toUpperCase()
               );
@@ -94,10 +112,12 @@ const router = createBrowserRouter([
 
             case "DELETE": {
               await sendPokemon(
-                `${import.meta.env.VITE_API_URL}/api/pokemons/${params.id}`,
+                `${basePokemonUrl}/${params.id}`,
                 {
                   name,
                   imageUrl,
+                  numberPokedex,
+                  type,
                 },
                 request.method.toUpperCase()
               );

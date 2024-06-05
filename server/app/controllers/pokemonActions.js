@@ -56,10 +56,14 @@ const add = async (req, res, next) => {
   const pokemon = req.body;
   try {
     // Insert the item into the database
-    const insertId = await tables.pokemon.create(pokemon);
+    const pokemonId = await tables.pokemon.create(pokemon);
+
+    const typeId = await tables.type.typeByName(pokemon.type);
+
+    await tables.pokemonType.create(pokemonId, typeId);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted item
-    res.status(201).json({ insertId });
+    res.status(201).json({ pokemonId });
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
@@ -71,6 +75,7 @@ const add = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     // Delete the program from the database
+    await tables.pokemonType.delete(req.params.id);
     await tables.pokemon.delete(req.params.id);
 
     // Respond with HTTP 204 (No Content)

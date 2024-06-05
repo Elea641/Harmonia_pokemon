@@ -12,8 +12,8 @@ class PokemonRepository extends AbstractRepository {
   async create(pokemon) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (name, image_url) values (?, ?)`,
-      [pokemon.name, pokemon.imageUrl]
+      `insert into ${this.table} (name, image_url, numero_pokedex) values (?, ?, ? )`,
+      [pokemon.name, pokemon.imageUrl, parseInt(pokemon.numberPokedex, 10)]
     );
 
     // Return the ID of the newly inserted item

@@ -37,26 +37,26 @@ CREATE TABLE pokemon_type (
     PRIMARY KEY (pokemon_id, type_id)
 );
 
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Bulbizarre', 'https://example.com/bulbizarre.png', 1);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Herbizarre', 'https://example.com/herbizarre.png', 2);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Florizarre', 'https://example.com/florizarre.png', 3);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Salamèche', 'https://example.com/salameche.png', 4);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Reptincel', 'https://example.com/reptincel.png', 5);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Dracaufeu', 'https://example.com/dracaufeu.png', 6);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Carapuce', 'https://example.com/carapuce.png', 7);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Carabaffe', 'https://example.com/carabaffe.png', 8);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Tortank', 'https://example.com/tortank.png', 9);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Chenipan', 'https://example.com/chenipan.png', 10);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Chrysacier', 'https://example.com/chrysacier.png', 11);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Papilusion', 'https://example.com/papilusion.png', 12);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Aspicot', 'https://example.com/aspicot.png', 13);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Coconfort', 'https://example.com/coconfort.png', 14);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Dardargnan', 'https://example.com/dardargnan.png', 15);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Roucool', 'https://example.com/roucool.png', 16);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Roucoups', 'https://example.com/roucoups.png', 17);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Roucarnage', 'https://example.com/roucarnage.png', 18);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Rattata', 'https://example.com/rattata.png', 19);
-INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Rattatac', 'https://example.com/rattatac.png', 20);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Bulbizarre', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png', 1);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Herbizarre', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png', 2);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Florizarre', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png', 3);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Salamèche', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png', 4);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Reptincel', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png', 5);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Dracaufeu', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png', 6);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Carapuce', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png', 7);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Carabaffe', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png', 8);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Tortank', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/009.png', 9);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Chenipan', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/010.png', 10);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Chrysacier', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/011.png', 11);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Papilusion', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/012.png', 12);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Aspicot', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/013.png', 13);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Coconfort', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/014.png', 14);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Dardargnan', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/015.png', 15);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Roucool', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/016.png', 16);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Roucoups', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/017.png', 17);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Roucarnage', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/018.png', 18);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Rattata', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/019.png', 19);
+INSERT INTO pokemon (name, image_url, numero_pokedex) VALUES ('Rattatac', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/020.png', 20);
 
 -- Bulbizarre (Plante, Poison)
 INSERT INTO pokemon_type (pokemon_id, type_id) VALUES (1, 5); -- Plante

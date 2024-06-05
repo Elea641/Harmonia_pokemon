@@ -10,7 +10,8 @@ label {
   margin: 0.5rem;
 }
 
-input {
+input,
+select {
   width: 8rem;
 }
 
