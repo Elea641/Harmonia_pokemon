@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-function PokemonCard({ pokemon }) {
+function PokemonCardList({ pokemon }) {
   return (
     <article>
       <img
@@ -15,12 +15,12 @@ function PokemonCard({ pokemon }) {
   );
 }
 
-PokemonCard.propTypes = {
+PokemonCardList.propTypes = {
   pokemon: PropTypes.shape({
     image_url: PropTypes.string,
     name: PropTypes.string,
-    numero_pokedex: PropTypes.string,
+    numero_pokedex: PropTypes.number,
   }).isRequired,
 };
 
-export default PokemonCard;
+export default PokemonCardList;
