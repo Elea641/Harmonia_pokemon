@@ -1,4 +1,5 @@
-@import "../src/assets/styles/PokemonCard.css";
+@import "../src/assets/styles/PokemonCardList.css";
+@import "../src/assets/styles/PokemonCardDetails.css";
 @import "../src/assets/styles/PokemonList.css";
 @import "../src/assets/styles/PokemonForm.css";
 @import "../src/assets/styles/Navbar.css";

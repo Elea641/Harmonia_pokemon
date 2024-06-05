@@ -3,13 +3,12 @@ import PokemonCardDetails from "../components/PokemonCardDetails";
 
 function PokemonDetails() {
   const pokemon = useLoaderData();
-  const types = pokemon.types.split(",");
   return (
     <>
       <Link to={`/pokemon/edition/${pokemon.id}`}>
         <h2>EDIT</h2>
       </Link>
-      <PokemonCardDetails pokemon={pokemon} types={types} />
+      <PokemonCardDetails pokemon={pokemon} />
     </>
   );
 }

@@ -2,7 +2,6 @@ import { Form, useLoaderData } from "react-router-dom";
 
 function PokemonEdit() {
   const loaderData = useLoaderData();
-  const typePokemon = loaderData.pokemon.types.split(",")[0];
   return (
     <>
       <Form method="PUT">
@@ -30,9 +29,9 @@ function PokemonEdit() {
         />
         <label htmlFor="type">Type</label>
         <select id="type" name="type">
-          {loaderData.types.map((type) => (
+          {loaderData.pokemon.types.map((type) => (
             <option key={type.id} value={type.name}>
-              {typePokemon}
+              {type.name}
             </option>
           ))}
         </select>

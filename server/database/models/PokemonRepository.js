@@ -23,62 +23,78 @@ class PokemonRepository extends AbstractRepository {
   // The Rs of CRUD - Read operations
 
   async read(id) {
-    // Execute the SQL SELECT query to retrieve a specific item by its ID
-    const [rows] = await this.database.query(
-      `SELECT 
-      p.id, 
-      p.name, 
-      p.image_url, 
-      p.numero_pokedex, 
-      GROUP_CONCAT(t.name SEPARATOR ', ') AS types
-  FROM 
-      ${this.table} p
-  JOIN 
-      pokemon_type pt ON p.id = pt.pokemon_id
-  JOIN 
-      type t ON t.id = pt.type_id
-  WHERE 
-      p.id = ?
-  GROUP BY 
-      p.id, 
-      p.name, 
-      p.image_url, 
-      p.numero_pokedex;
-  `,
-      [id]
-    );
+    const query = `
+      SELECT 
+        p.id, 
+        p.name, 
+        p.image_url, 
+        p.numero_pokedex, 
+        t.id AS type_id, 
+        t.name AS type_name
+      FROM 
+        ${this.table} p
+      LEFT JOIN 
+        pokemon_type pt ON p.id = pt.pokemon_id
+      LEFT JOIN 
+        type t ON t.id = pt.type_id
+      WHERE 
+        p.id = ?;
+    `;
+    const [rows] = await this.database.query(query, [id]);
 
-    // Return the first row of the result, which represents the item
-    return rows[0];
+    if (rows.length === 0) return null;
+
+    const pokemon = {
+      id: rows[0].id,
+      name: rows[0].name,
+      image_url: rows[0].image_url,
+      numero_pokedex: rows[0].numero_pokedex,
+      types: rows.map((row) => ({ id: row.type_id, name: row.type_name })),
+    };
+
+    return pokemon;
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all Pokémon with their associated types
     const query = `
-          SELECT 
-              p.id, 
-              p.name, 
-              p.image_url, 
-              p.numero_pokedex, 
-              GROUP_CONCAT(t.name SEPARATOR ', ') AS types
-          FROM 
-              pokemon p
-          JOIN 
-              pokemon_type pt ON p.id = pt.pokemon_id
-          JOIN 
-              type t ON t.id = pt.type_id
-          GROUP BY 
-              p.id, 
-              p.name, 
-              p.image_url, 
-              p.numero_pokedex;
-      `;
-
-    // Execute the query
+      SELECT 
+        p.id, 
+        p.name, 
+        p.image_url, 
+        p.numero_pokedex, 
+        t.id AS type_id, 
+        t.name AS type_name
+      FROM 
+        pokemon p
+      LEFT JOIN 
+        pokemon_type pt ON p.id = pt.pokemon_id
+      LEFT JOIN 
+        type t ON t.id = pt.type_id;
+    `;
     const [rows] = await this.database.query(query);
 
-    // Return the array of Pokémon with their types
-    return rows;
+    const pokemons = [];
+    const pokemonMap = new Map();
+
+    rows.forEach((row) => {
+      if (!pokemonMap.has(row.id)) {
+        const pokemon = {
+          id: row.id,
+          name: row.name,
+          image_url: row.image_url,
+          numero_pokedex: row.numero_pokedex,
+          types: [],
+        };
+        pokemonMap.set(row.id, pokemon);
+        pokemons.push(pokemon);
+      }
+      const pokemon = pokemonMap.get(row.id);
+      if (row.type_id && row.type_name) {
+        pokemon.types.push({ id: row.type_id, name: row.type_name });
+      }
+    });
+
+    return pokemons;
   }
 
   async update(pokemon, id) {
