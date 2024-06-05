@@ -9,7 +9,7 @@ function PokemonCard({ pokemon }) {
         alt="affiche d'un pokémon"
       />
       <h2>
-        `N° " + ${pokemon.numero_pokedex} + " " + ${pokemon.name}`
+        N° {pokemon.numero_pokedex} {pokemon.name}
       </h2>
     </article>
   );
