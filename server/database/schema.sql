@@ -15,3 +15,17 @@ INSERT INTO pokemon (name, image_url) VALUES
 ('Machop', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/066.png'),
 ('Gengar', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/094.png'),
 ('Eevee', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/133.png');
+
+
+create table item (
+  id int unsigned primary key auto_increment not null,
+  title varchar(255) not null,
+  FOREIGN KEY (user_id) REFERENCES user(id)
+  user_id int not null
+);
+
+create table user (
+  id int unsigned primary key auto_increment not null,
+  email varchar(255) not null,
+  password varchar(255) not null
+  );
