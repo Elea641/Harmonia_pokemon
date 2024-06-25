@@ -19,7 +19,7 @@ const validatePokemon = require("../../../middlewares/validatePokemon");
 const nameValidatePokemon = require("../../../middlewares/nameValidatePokemon");
 
 // Route to get a list of items
-router.get("", browse);
+router.get("/", browse);
 
 // Route to get a specific item by ID
 router.get("/:id", read);
