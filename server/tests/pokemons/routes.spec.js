@@ -2,7 +2,7 @@
 const { app, request, database } = require("../config");
 
 describe("GET /api/pokemons", () => {
-  it("should fetch items successfully", async () => {
+  it("should fetch pokemons successfully", async () => {
     const rows = [];
 
     jest.spyOn(database, "query").mockImplementation(() => [rows]);

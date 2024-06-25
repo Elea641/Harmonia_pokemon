@@ -5,8 +5,8 @@ const { database, tables } = require("../config");
 const AbstractRepository = require("../../database/models/AbstractRepository");
 const PokemonRepository = require("../../database/models/PokemonRepository");
 
-describe("ItemRepository", () => {
-  test("ItemRepository extends AbstractRepository", async () => {
+describe("PokemonRepository", () => {
+  test("PokemonRepository extends AbstractRepository", async () => {
     expect(Object.getPrototypeOf(PokemonRepository)).toBe(AbstractRepository);
   });
 
@@ -26,16 +26,12 @@ describe("ItemRepository", () => {
   });
 
   test("read => select with id", async () => {
-    // Mock rows returned from the database
     const rows = [{}];
 
-    // Mock the implementation of the database query method
     jest.spyOn(database, "query").mockImplementation(() => [rows]);
 
-    // Call the read method of the item repository
     const returned = await tables.pokemon.read(0);
 
-    // Assertions
     expect(database.query).toHaveBeenCalledWith(
       "select * from pokemon where id = ?",
       [0]
